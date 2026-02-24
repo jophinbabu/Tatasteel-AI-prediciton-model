@@ -30,12 +30,12 @@ temp/
 .idea/
 .vscode/
 
-# Models
-models/saved/*.keras
-models/saved/*.joblib
-models/saved/*.txt
-models/saved/*.h5
-models/saved/*.pkl
+# Models (Commented out to allow deployment to Render)
+# models/saved/*.keras
+# models/saved/*.joblib
+# models/saved/*.txt
+# models/saved/*.h5
+# models/saved/*.pkl
 
 # Frontend build
 frontend/dist/
