@@ -11,16 +11,3 @@ services:
         value: "PAPER"
       - key: LOG_LEVEL
         value: "INFO"
-      
-  - type: worker
-    name: tata-trading-bot
-    env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "python main.py --mode trade"
-    envVars:
-      - key: PYTHON_VERSION
-        value: "3.10.0"
-      - key: ACTIVE_BROKER
-        value: "PAPER"
-      - key: LOG_LEVEL
-        value: "INFO"
