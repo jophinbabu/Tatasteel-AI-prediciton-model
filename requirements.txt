@@ -16,3 +16,4 @@ Pillow
 streamlit
 lightgbm
 kiteconnect
+opencv-python-headless
