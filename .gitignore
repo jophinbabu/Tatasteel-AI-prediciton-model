@@ -20,7 +20,7 @@ logs/
 *.log
 
 # Data
-data/
+data/chart_images/
 *.csv
 *.db
 *.sqlite3
