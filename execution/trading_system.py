@@ -94,15 +94,20 @@ class TradingSystem:
         weight_path = f'models/saved/{ticker}_ensemble_weight.joblib'
         
         if os.path.exists(cnn_path) and os.path.exists(weight_path):
-            from training.hybrid_trainer import HybridTrainer
-            from tensorflow.keras.models import load_model
-            
-            print("Hybrid model found! Loading Vision System...")
-            self.hybrid_scanner = HybridTrainer(ticker)
-            self.hybrid_scanner.lstm_trainer = self.trainer  # Share the loaded LSTM/LightGBM features
-            self.hybrid_scanner.cnn_model = load_model(cnn_path)
-            self.hybrid_scanner.ensemble_weight = joblib.load(weight_path)
-            print(f"Loaded Hybrid System (Ensemble weight: {self.hybrid_scanner.ensemble_weight:.2f})")
+            try:
+                from training.hybrid_trainer import HybridTrainer
+                from tensorflow.keras.models import load_model
+                
+                print("Hybrid model found! Loading Vision System...")
+                self.hybrid_scanner = HybridTrainer(ticker)
+                self.hybrid_scanner.lstm_trainer = self.trainer  # Share the loaded LSTM/LightGBM features
+                self.hybrid_scanner.cnn_model = load_model(cnn_path)
+                self.hybrid_scanner.ensemble_weight = joblib.load(weight_path)
+                print(f"Loaded Hybrid System (Ensemble weight: {self.hybrid_scanner.ensemble_weight:.2f})")
+            except Exception as e:
+                print(f"WARNING: Could not load CNN/Hybrid model: {e}")
+                print("Continuing with primary model only (LightGBM/LSTM).")
+                self.hybrid_scanner = None
         
         if self.trainer.feature_columns:
             print(f"Loaded feature list ({len(self.trainer.feature_columns)} features)")
